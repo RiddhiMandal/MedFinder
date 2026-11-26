@@ -1,0 +1,11 @@
+fish_oil_warfarin:
+  substance_a: fish oil (omega-3)
+  substance_b: warfarin (blood thinner)
+  severity: moderate
+  summary: High doses may raise bleeding risk.
+
+iron_calcium:
+  substance_a: iron
+  substance_b: calcium
+  severity: low
+  summary: Take them two hours apart.

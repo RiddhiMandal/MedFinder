@@ -1,0 +1,66 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema[8.1].define(version: 2026_11_26_192432) do
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.string "topic"
+    t.text "body"
+    t.text "sources"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.string "title"
+    t.json "api_messages", default: [], null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "interactions", force: :cascade do |t|
+    t.string "substance_a"
+    t.string "substance_b"
+    t.string "severity"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "conversation_id", null: false
+    t.string "role"
+    t.text "body"
+    t.json "trace", default: [], null: false
+    t.string "status", default: "done", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "brand"
+    t.string "category"
+    t.string "form"
+    t.string "serving_size"
+    t.integer "price_cents"
+    t.boolean "in_stock", default: true, null: false
+    t.text "ingredients"
+    t.text "description"
+    t.string "tags"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "messages", "conversations"
+end

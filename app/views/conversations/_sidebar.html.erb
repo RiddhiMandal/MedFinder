@@ -1,0 +1,13 @@
+<aside class="w-full shrink-0 md:w-60">
+  <%= button_to "+ New conversation", conversations_path,
+        class: "w-full rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700" %>
+  <ul class="mt-4 space-y-1 text-sm">
+    <% conversations.each do |c| %>
+      <li>
+        <%= link_to c.display_title, conversation_path(c),
+              class: ["block truncate rounded px-2 py-1.5 hover:bg-stone-200",
+                      ("bg-stone-200 font-medium" if c == current)] %>
+      </li>
+    <% end %>
+  </ul>
+</aside>

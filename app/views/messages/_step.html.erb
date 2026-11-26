@@ -1,0 +1,25 @@
+<% colors = { "reasoning" => "bg-violet-100 text-violet-800", "note" => "bg-sky-100 text-sky-800",
+               "tool_call" => "bg-amber-100 text-amber-800", "tool_result" => "bg-emerald-100 text-emerald-800",
+               "answer" => "bg-stone-200 text-stone-700" } %>
+<li class="flex gap-2">
+  <span class="mt-0.5 h-fit shrink-0 rounded px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide <%= colors[step["type"]] %>">
+    <%= step_label(step) %>
+  </span>
+  <div class="min-w-0 flex-1 text-stone-700">
+    <% case step["type"] %>
+    <% when "reasoning", "note" %>
+      <p class="whitespace-pre-line"><%= step["text"] %></p>
+    <% when "tool_call" %>
+      <code class="font-semibold"><%= step["tool"] %></code>
+      <code class="break-all text-stone-500"><%= step["input"].to_json %></code>
+    <% when "tool_result" %>
+      <details>
+        <summary class="cursor-pointer <%= "text-red-700" if step["error"] %>"><%= tool_result_summary(step) %></summary>
+        <pre class="mt-1 max-h-64 overflow-auto rounded bg-white p-2 text-xs"><%= JSON.pretty_generate(step["output"]) %></pre>
+      </details>
+    <% when "answer" %>
+      <span><%= step["status"] == "done" ? "Wrote the final answer" : "Stopped (#{step["status"]})" %></span>
+      <% if step["model"].present? %><span class="text-stone-400">· model: <%= step["model"] %></span><% end %>
+    <% end %>
+  </div>
+</li>

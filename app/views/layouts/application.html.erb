@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Supplement Agent" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-stone-50 text-stone-900 antialiased">
+    <header class="border-b border-stone-200 bg-white">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
+        <%= link_to root_path, class: "flex items-center gap-2 font-semibold" do %>
+          <span class="inline-block h-6 w-6 rounded-full bg-emerald-600"></span>
+          Supplement Agent
+        <% end %>
+        <span class="text-xs text-stone-500">Demo project · general information, not medical advice</span>
+      </div>
+    </header>
+    <main class="mx-auto max-w-6xl px-5 py-6">
+      <%= yield %>
+    </main>
+  </body>
+</html>

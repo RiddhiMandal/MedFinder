@@ -1,0 +1,29 @@
+glycinate:
+  name: Magnesium Glycinate 120 mg
+  brand: Northfield Naturals
+  category: Minerals
+  form: capsule
+  price_cents: 2499
+  in_stock: true
+  ingredients: Magnesium bisglycinate chelate
+  tags: magnesium glycinate sleep
+
+oxide:
+  name: Magnesium Oxide 400
+  brand: ValueWell
+  category: Minerals
+  form: tablet
+  price_cents: 899
+  in_stock: false
+  ingredients: Magnesium oxide
+  tags: magnesium oxide budget
+
+b12:
+  name: B12 500 mcg
+  brand: ValueWell
+  category: Vitamins
+  form: tablet
+  price_cents: 599
+  in_stock: true
+  ingredients: Vitamin B12 (cyanocobalamin)
+  tags: b12 vegan

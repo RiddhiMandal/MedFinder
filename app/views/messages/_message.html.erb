@@ -1,0 +1,27 @@
+<%= tag.div id: dom_id(message), class: ["flex", message.assistant? ? "justify-start" : "justify-end"] do %>
+  <% if message.assistant? %>
+    <div class="w-full max-w-3xl space-y-3">
+      <details class="rounded-lg border border-stone-200 bg-stone-50 text-sm" <%= "open" if message.status == "working" %>>
+        <summary class="cursor-pointer select-none px-3 py-2 text-stone-600">
+          <% if message.status == "working" %>
+            <span class="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-600"></span> Working…
+          <% else %>
+            How I got this answer
+            <span class="text-stone-400">· <%= pluralize(message.tool_calls.size, "tool call") %></span>
+          <% end %>
+        </summary>
+        <ol id="trace_<%= message.id %>" class="space-y-2 border-t border-stone-200 px-3 py-3">
+          <%= render partial: "messages/step", collection: message.trace, as: :step %>
+        </ol>
+      </details>
+
+      <% unless message.status == "working" %>
+        <div class="answer prose-sm rounded-xl px-4 py-3 <%= message.status == "error" ? "bg-red-50 text-red-800" : "bg-emerald-50" %>">
+          <%= render_answer(message.body) %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="max-w-xl rounded-xl bg-stone-800 px-4 py-2 text-white"><%= message.body %></div>
+  <% end %>
+<% end %>
